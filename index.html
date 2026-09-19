@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Cable Planner</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= LOGIN ================= -->
+
+    <div id="loginPage" class="login-page">
+
+        <div class="login-box">
+
+            <div class="logo">
+                🔌
+            </div>
+
+            <h1>Campus Cable Planner</h1>
+            <p class="subtitle">System Login</p>
+
+            <form id="loginForm">
+
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+
+                <label>Password</label>
+
+                <input type="password" id="password" placeholder="Enter password" required>
+
+                <button type="submit" class="login-btn">
+                    Login
+                </button>
+
+                <p id="loginMessage"></p>
+
+            </form>
+
+            <div class="demo-login">
+                Demo: FUBAO / FUBAO123
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN APPLICATION ================= -->
+
+    <div id="app" class="app hidden">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+
+                <div class="gov-logo">🔌</div>
+
+                <div>
+                    <h2>Cable Planner</h2>
+                    <span>Administration</span>
+                </div>
+
+            </div>
+
+
+            <nav>
+
+                <button class="nav-btn active" data-section="dashboard">
+                    🏠 Dashboard
+                </button>
+
+                <button class="nav-btn" data-section="cables">
+                    📡 Cable Search
+                </button>
+
+                <button class="nav-btn" data-section="path">
+                    📍 Shortest Path
+                </button>
+
+                <button class="nav-btn" data-section="failure">
+                    ⚠️ Failure Planner
+                </button>
+
+                <button class="nav-btn" data-section="dispatch">
+                    👷 Technician Dispatch
+                </button>
+
+                <button class="nav-btn" data-section="traffic">
+                    🚥 Traffic Controller
+                </button>
+
+            </nav>
+
+
+            <button id="logoutBtn" class="logout-btn">
+                🚪 Logout
+            </button>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+            <!-- HEADER -->
+
+            <header class="topbar">
+
+                <div>
+                    <h1 id="pageTitle">Dashboard</h1>
+                    <p>Campus Cable Management System</p>
+                </div>
+
+                <div class="admin-info">
+                    👤 System Admin
+                </div>
+
+            </header>
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section id="dashboard" class="section active-section">
+
+                <div class="welcome-card">
+
+                    <div>
+
+                        <h2>Welcome to Campus Cable Planner</h2>
+
+                        <p>
+                            Manage network topology, find shortest paths,
+                            simulate failures, and dispatch technicians.
+                        </p>
+
+                    </div>
+
+                    <div class="welcome-icon">
+                        🌐
+                    </div>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">🏢</div>
+
+                        <div>
+                            <span>Total Nodes</span>
+                            <strong id="totalNodes">21</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">🔗</div>
+
+                        <div>
+                            <span>Total Connections</span>
+                            <strong id="totalConnections">21</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">⚠️</div>
+
+                        <div>
+                            <span>Network Status</span>
+                            <strong id="netStatus" style="color: green;">SAFE</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">👷</div>
+
+                        <div>
+                            <span>Available Techs</span>
+                            <strong id="availableTechs">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <h3>Recent Activity</h3>
+
+                        </div>
+
+                        <div id="recentRecords">
+                            <div class="recent-item">
+                                <div>
+                                    <div class="recent-name">System Initialized</div>
+                                    <div class="recent-id">All nodes loaded successfully</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <h3>Quick Actions</h3>
+
+                        </div>
+
+                        <div class="quick-actions">
+
+                            <button data-section="cables" class="quick-btn">
+                                🔎 Search Cables
+                            </button>
+
+                            <button data-section="path" class="quick-btn">
+                                🗺️ Find Route
+                            </button>
+
+                            <button data-section="failure" class="quick-btn">
+                                ⚡ Simulate Cut
+                            </button>
+
+                            <button data-section="traffic" class="quick-btn">
+                                📊 Check Load
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= CABLES ================= -->
+
+            <section id="cables" class="section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Cable Search System</h2>
+                        <p>Search and view all network connections.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="searchNodeInput" placeholder="Enter node name (e.g., AB-4)">
+                        <button id="searchNodeBtn" class="primary-btn">Search</button>
+                    </div>
+                </div>
+
+                <div id="cableResults" class="panel">
+                    <h3>All Connections</h3>
+                    <div class="table-container">
+                        <table id="connectionsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Source</th>
+                                    <th>Destination</th>
+                                    <th>Length (m)</th>
+                                    <th>Capacity (Mbps)</th>
+                                    <th>Load (Mbps)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="connectionsBody">
+                                <!-- Data will be loaded via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ================= SHORTEST PATH ================= -->
+
+            <section id="path" class="section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Shortest Path Finder</h2>
+                        <p>Calculate the most efficient route between two points.</p>
+                    </div>
+                </div>
+
+                <div class="panel form-grid">
+                    <div class="form-group">
+                        <label>Start Node</label>
+                        <select id="pathStart"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>End Node</label>
+                        <select id="pathEnd"></select>
+                    </div>
+                    <div class="form-actions" style="grid-column: span 2;">
+                        <button id="findPathBtn" class="primary-btn full-width">Calculate Route</button>
+                    </div>
+                </div>
+
+                <div id="pathResult" class="hidden panel">
+                    <!-- Results populated by JS -->
+                </div>
+
+            </section>
+
+
+            <!-- ================= FAILURE PLANNER ================= -->
+
+            <section id="failure" class="section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Cable Failure & Backup Planner</h2>
+                        <p>Simulate a cable cut and evaluate alternative routes.</p>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="form-group">
+                        <label>Select Connection to Simulate Failure</label>
+                        <select id="failSelect"></select>
+                    </div>
+                    <button id="simFailBtn" class="primary-btn">Simulate Cut</button>
+                </div>
+                
+                <div id="failResult" class="hidden panel">
+                     <!-- Results populated by JS -->
+                </div>
+
+            </section>
+
+
+            <!-- ================= DISPATCH ================= -->
+
+            <section id="dispatch" class="section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Technician Dispatch</h2>
+                        <p>Assign IT technicians to cable faults efficiently.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <p style="color: #6b7280; font-style: italic;">This module handles technician routing optimization based on Dijkstra's shortest path.</p>
+                    <br>
+                    <p>To run the full dispatch simulation with custom technician locations and fault points, please use the provided C++ terminal application.</p>
+                </div>
+
+            </section>
+
+
+            <!-- ================= TRAFFIC ================= -->
+
+            <section id="traffic" class="section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Traffic Controller</h2>
+                        <p>Request bandwidth and evaluate network congestion.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                     <p style="color: #6b7280; font-style: italic;">This module dynamically calculates routes avoiding congested links.</p>
+                     <br>
+                     <p>To run traffic simulations and check real-time load percentages, please use the provided C++ terminal application.</p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- DEVELOPER INFO POPUP (Moved to Right) -->
+    <div class="dev-container">
+        <button class="dev-btn" id="devBtn">Developers</button>
+        <div class="dev-popup" id="devPopup">
+            <ol>
+                <li>Sabbir Hosen Joy</li>
+                <li>Abu Sadid</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
