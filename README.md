@@ -20,7 +20,3 @@ To run the full backend algorithms for shortest paths, dispatch simulation, and 
    ```bash
    ./cableplanner
    ```
-
-## Developers
-- Sabbir Hosen Joy
-- Abu Sadid
